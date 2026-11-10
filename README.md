@@ -1,25 +1,24 @@
-# SULMOS26 IT & Telecommunications Edition — Starter v0.1
+# SULMOS26 IT & Telecommunications — Operations Edition v0.2
 
-## Included
-- Official SULMOS26 uploaded logo on the company settings screen and branded navigation.
-- App icons cropped from the original logo symbol: 192×192, 512×512, and Apple touch icon.
-- PWA manifest and offline service worker for HTTPS/localhost hosting.
-- Responsive dashboard with statistics.
-- Customer register; support ticket log; technician job register; equipment tracking.
-- Create/edit/delete/search and browser-local persistence.
-- Editable company identity.
+Deploy the extracted contents to any static HTTPS host (GitHub Pages or Cloudflare Pages). `index.html` must be in the published root directory. Install via browser PWA when supported.
 
-## Run locally
-To preview with PWA install support, start a local HTTP server inside this directory:
+## Operational modules
 
-```bash
-python -m http.server 8080
-```
+- Customers, support tickets, field technician jobs, equipment/assets
+- Security solutions: CCTV, alarms, access control, intercoms, electric fences, surveys, testing and preventive maintenance dates
+- Tech hardware: SKU, categories, prices, stock-on-hand and reorder thresholds
+- Hardware sales: draft/confirmed/cancelled sales linked to customer and SKU; confirmation decrements stock; cancellation/change/deletion restores confirmed stock
+- LTE and telecom subscriptions: LTE uncapped, LTE capped, 5G, fibre, wireless, network, SIM and router IDs, billing/renewal dates and monthly fees
+- Structured cabling: copper/fibre, port counts, metres, technicians and test results
+- Live device-record dashboard: open tickets, active contracts, renewals within 30 days, upcoming security servicing and reorder alerts
+- Company settings with JSON export and restore
 
-Open `http://localhost:8080` in Chrome or Edge. You can also upload the *contents* of this folder to a static HTTPS website. On HTTPS or localhost, supported browsers can show **Install App** or use browser menu → Install app. The installed home-screen icon uses the supplied SULMOS26 symbol.
+## CRITICAL: storage/security limitations
 
-## Important production limitations
-This is a usable **single-device starter**, not a production multi-company ERP. Data is in localStorage and can be lost if browser site data is cleared. Do not put customer-sensitive information or passwords into it. The badge “Local demo” indicates no hosted backend. User authentication, tenant isolation, PostgreSQL, full audit log, server synchronization, encrypted credentials, invoicing, integration, field offline sync and automated notifications are NOT implemented. Those require further development and a secure server environment.
+This release is operational for **single-device, locally saved records** only. It is not a production multi-user SaaS application. `localStorage` data can be lost if browser storage is cleared; export backups regularly. Do not use this version for sensitive records, payment information, customer passwords, SIM PINs or full identity numbers. Password login, tenant/company isolation, cloud synchronization, full accounting, SLA automation, secure file uploads, audit trails, supplier orders, WhatsApp sending, payment collection and automatic billing are NOT provided. Hardware stock is maintained within this browser only, and concurrent multi-user inventory operations are not supported.
 
-## Next build
-Set up Node.js + PostgreSQL + Prisma backend, company-scoped authentication/authorization, audit trails, transactional job status handling, proper client data backups, technicians and departments, billing, and optional offline synchronization. Deploy and test against the intended origin before real customer use.
+## Next production build
+
+Cloudflare Worker API + D1/PostgreSQL, tenant IDs on all business tables, per-company authorization, audit ledger, signed backup/import, and transactional inventory reservations & invoicing. Do not point several browsers at the static PWA and assume they share data.
+
+Official SULMOS26 icon and full logo are included in `assets/`.
